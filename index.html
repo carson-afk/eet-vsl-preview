@@ -97,6 +97,23 @@
   .eet-stats-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; max-width: 1080px; margin: 0 auto; }
   .eet-stat { background: linear-gradient(180deg, rgba(20,32,24,.85), rgba(10,16,12,.6)); border: 1px solid var(--eet-card-border); border-radius: 18px; padding: 28px 22px; min-height: 150px; min-width: 0; transition: transform .25s ease, border-color .25s ease; }
   .eet-stat-value { word-break: keep-all; }
+  /* Mobile: stats become a swipe-and-auto-scroll carousel */
+  @media (max-width: 720px) {
+    .eet-stats { padding: 24px 0 56px; overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+              mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+    }
+    .eet-stats-grid {
+      display: flex; grid-template-columns: none; max-width: none;
+      width: max-content; gap: 14px; padding: 0 14px;
+      animation: eet-marq 32s linear infinite;
+    }
+    .eet-stats-grid:hover, .eet-stats-grid:active { animation-play-state: paused; }
+    .eet-stat {
+      flex: 0 0 220px; max-width: 220px; min-height: 170px;
+    }
+    .eet-stat-value { font-size: 38px; }
+  }
   .eet-stat:hover { transform: translateY(-3px); border-color: rgba(34,197,94,.42); }
   .eet-stat-label { color:#fff; font-size:14px; font-weight:600; letter-spacing:.02em; }
   .eet-stat-value { margin-top: 12px; font-size: clamp(34px, 4vw, 52px); font-weight: 800; color: var(--eet-green-bright); letter-spacing: -0.02em; }
@@ -302,7 +319,7 @@
 
   <section class="eet-stats">
     <div class="eet-container">
-      <div class="eet-stats-grid">
+      <div class="eet-stats-grid" id="eetStatsTrack">
         <div class="eet-stat eet-reveal"><div class="eet-stat-label">Year 1 Revenue</div><div class="eet-stat-value">$280K</div><div class="eet-stat-desc">What Carson did at age 20 with zero experience and no backing.</div></div>
         <div class="eet-stat eet-reveal"><div class="eet-stat-label">500-Day Total</div><div class="eet-stat-value">$400K+</div><div class="eet-stat-desc">Total revenue in his first 500 days running Evergreen Epoxy.</div></div>
         <div class="eet-stat eet-reveal"><div class="eet-stat-label">Per Job</div><div class="eet-stat-value">$5–50K</div><div class="eet-stat-desc">Typical revenue per single job — residential garages, full basements, and commercial pours.</div></div>
@@ -342,8 +359,6 @@
   <section class="eet-vsl-wrap">
     <div class="eet-container">
       <div class="eet-vsl-frame">
-        <div class="eet-vsl-tag-left"><strong>$280K</strong> in 12 months</div>
-        <div class="eet-vsl-tag-right"><strong>The complete</strong><br/>epoxy flooring business system</div>
         <div class="eet-vsl-video">
           <script src="https://fast.wistia.com/embed/medias/1lq4agqnsl.jsonp" async></script>
           <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
@@ -466,6 +481,10 @@
     function duplicateTrack(id){ var t = document.getElementById(id); if (!t) return; t.innerHTML = t.innerHTML + t.innerHTML; }
     duplicateTrack('eetStatesTrack');
     duplicateTrack('eetTestTrack');
+    // Stats track only duplicates on mobile (where it becomes a marquee)
+    if (window.matchMedia('(max-width: 720px)').matches) {
+      duplicateTrack('eetStatsTrack');
+    }
 
     function animateCount(el, finalText){
       var rangeMatch = finalText.match(/^([^0-9]*)([0-9]+)([^0-9]+)([0-9]+)([^0-9]*)$/);
@@ -487,18 +506,4 @@
     var modalBody = document.getElementById('eetModalBody');
     function openLegal(name){ var tpl = document.getElementById('eet-legal-' + name); if (!tpl || !modalRoot) return; modalBody.innerHTML = ''; modalBody.appendChild(tpl.content.cloneNode(true)); modalRoot.classList.add('open'); modalRoot.scrollTop = 0; document.body.style.overflow = 'hidden'; }
     function closeLegal(){ modalRoot.classList.remove('open'); document.body.style.overflow = ''; }
-    document.querySelectorAll('[data-eet-legal]').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); openLegal(a.getAttribute('data-eet-legal')); }); });
-    if (modalRoot) {
-      modalRoot.addEventListener('click', function(e){ if (e.target === modalRoot || e.target.classList.contains('eet-modal-close')) closeLegal(); });
-      document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && modalRoot.classList.contains('open')) closeLegal(); });
-    }
-
-    if ('IntersectionObserver' in window) {
-      var seen = new WeakSet();
-      var statIo = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if (e.isIntersecting && !seen.has(e.target)) {
-            seen.add(e.target);
-            var finalText = e.target.dataset.final || e.target.textContent.trim();
-            e.target.dataset.final = finalText;
-            animateCount(e.ta
+    document.querySelectorAll('[data-eet-legal]').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); openLegal(a.getA
