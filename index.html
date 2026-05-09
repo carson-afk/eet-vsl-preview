@@ -1,3 +1,4 @@
+<!-- v3 deploy 1746825000 -->
 <!-- =====================================================================
      EVERGREEN EPOXY TRAINING — VSL Landing Page
      Layout cloned 1:1 from viralcoach.com / Color palette: green + black
@@ -154,6 +155,111 @@
   .eet-vsl-video { position: relative; width: 100%; border-radius: 14px; overflow: hidden; background: #000; }
   .eet-vsl-cta { text-align:center; margin-top: 32px; }
 
+  /* Custom VSL thumbnail overlay (click to play) */
+  .eet-vsl-poster {
+    position: absolute; inset: 0; z-index: 10;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(34,197,94,.18), transparent 55%),
+      radial-gradient(circle at 20% 80%, rgba(20,83,45,.32), transparent 55%),
+      linear-gradient(135deg, #06140d 0%, #0a2818 50%, #04130a 100%);
+    cursor: pointer; overflow: hidden;
+    transition: opacity .45s ease, visibility .45s ease;
+    display: grid; place-items: center; padding: 24px;
+    border-radius: 14px;
+  }
+  .eet-vsl-poster::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 50% 50%, transparent 60%, rgba(0,0,0,.35) 100%),
+      repeating-linear-gradient(0deg, rgba(34,197,94,.04) 0 1px, transparent 1px 4px);
+    pointer-events: none;
+  }
+  .eet-vsl-poster.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+  .eet-vsl-poster-content {
+    position: relative; z-index: 2; max-width: 760px; text-align: center; color: #fff;
+  }
+  .eet-vsl-poster-eyebrow {
+    display: inline-block;
+    font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--eet-green-bright);
+    padding: 7px 14px;
+    border: 1px solid rgba(34,197,94,.38);
+    border-radius: 999px;
+    background: rgba(34,197,94,.08);
+    margin-bottom: 18px;
+  }
+  .eet-vsl-poster h3 {
+    font-size: clamp(22px, 3.6vw, 44px);
+    line-height: 1.12; margin: 0 0 12px;
+    color: #fff; letter-spacing: -0.015em;
+  }
+  .eet-vsl-poster h3 .accent {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-style: italic; font-weight: 600;
+    color: var(--eet-green-bright);
+  }
+  .eet-vsl-poster p {
+    font-size: clamp(14px, 1.6vw, 17px);
+    color: #cdd5cf; max-width: 600px; margin: 0 auto 22px;
+    line-height: 1.5;
+  }
+  .eet-vsl-poster-meta {
+    display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center;
+    margin-bottom: 26px; font-size: 12.5px; letter-spacing: .04em;
+    color: rgba(255,255,255,.85);
+  }
+  .eet-vsl-poster-meta span {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 999px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(34,197,94,.18);
+  }
+  .eet-vsl-poster-meta span::before {
+    content: '✓'; color: var(--eet-green-bright); font-weight: 800;
+  }
+  .eet-vsl-play {
+    width: 84px; height: 84px; border-radius: 50%; border: 0;
+    background: linear-gradient(180deg, #34d97a 0%, #15a04a 100%);
+    color: #04130a; font-size: 26px; cursor: pointer;
+    display: grid; place-items: center;
+    box-shadow: 0 0 0 0 rgba(34,197,94,.6), 0 18px 40px rgba(34,197,94,.35), inset 0 1px 0 rgba(255,255,255,.3);
+    transition: transform .2s ease, box-shadow .25s ease;
+    animation: eet-vsl-pulse 2.4s ease-in-out infinite;
+    position: relative;
+  }
+  .eet-vsl-play::before {
+    content: ''; display: block;
+    width: 0; height: 0;
+    border-left: 22px solid #04130a;
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    margin-left: 6px;
+  }
+  @keyframes eet-vsl-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,.55), 0 18px 40px rgba(34,197,94,.35), inset 0 1px 0 rgba(255,255,255,.3); }
+    70%      { box-shadow: 0 0 0 28px rgba(34,197,94,0),  0 18px 40px rgba(34,197,94,.35), inset 0 1px 0 rgba(255,255,255,.3); }
+  }
+  .eet-vsl-poster:hover .eet-vsl-play { transform: scale(1.06); }
+  .eet-vsl-poster-cta {
+    margin-top: 18px; font-size: 13px; color: #fff;
+    letter-spacing: .04em; opacity: .85;
+  }
+  .eet-vsl-poster-cta::before { content: '▶  '; color: var(--eet-green-bright); font-size: 11px; }
+  /* Decorative corner brackets */
+  .eet-vsl-poster .corner {
+    position: absolute; width: 38px; height: 38px;
+    border: 2px solid rgba(34,197,94,.4); pointer-events: none;
+  }
+  .eet-vsl-poster .corner.tl { top: 14px; left: 14px; border-right: 0; border-bottom: 0; border-radius: 6px 0 0 0; }
+  .eet-vsl-poster .corner.tr { top: 14px; right: 14px; border-left: 0; border-bottom: 0; border-radius: 0 6px 0 0; }
+  .eet-vsl-poster .corner.bl { bottom: 14px; left: 14px; border-right: 0; border-top: 0; border-radius: 0 0 0 6px; }
+  .eet-vsl-poster .corner.br { bottom: 14px; right: 14px; border-left: 0; border-top: 0; border-radius: 0 0 6px 0; }
+  @media (max-width: 720px) {
+    .eet-vsl-poster .corner { width: 26px; height: 26px; }
+    .eet-vsl-play { width: 68px; height: 68px; }
+    .eet-vsl-poster-meta { font-size: 11px; }
+  }
+
   .eet-system { padding: 72px 0 4px; text-align:center; position: relative; }
   .eet-system::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(34,197,94,.4), transparent); }
   .eet-system h2 { color:#fff; font-size: clamp(24px, 3vw, 36px); max-width: 720px; margin: 0 auto; }
@@ -174,12 +280,15 @@
   .eet-orbit-tag.br { bottom: 14%; right: 4%; animation-delay: -4.4s; }
   .eet-orbit-tag.b  { bottom: 0%; left: 50%; transform: translateX(-50%); animation-delay: -5.7s; }
   @keyframes eet-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
-  @media (max-width: 720px) {
-    .eet-orbit { aspect-ratio: auto; min-height: 0; padding: 8px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 460px; }
-    .eet-orbit-tag { position: static; display: block; margin: 0; transform: none; text-align: center; white-space: normal; padding: 16px 18px; font-size: 13px; }
+  @media (max-width: 1024px) {
+    .eet-orbit { aspect-ratio: auto; min-height: 0; padding: 8px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 620px; }
+    .eet-orbit-tag { position: static; display: block; margin: 0; transform: none !important; text-align: center; white-space: normal; padding: 18px 16px; font-size: 13px; animation: none; }
     .eet-orbit-ring, .eet-orbit-dots { display:none; }
-    .eet-orbit-core { position: relative; left: auto; top: auto; transform: none; margin: 0 auto 18px; width: 110px; height: 110px; }
-    .eet-orbit .eet-orbit-core { grid-column: 1 / -1; }
+    .eet-orbit-core { position: relative; left: auto; top: auto; transform: none; margin: 0 auto 6px; width: 130px; height: 130px; grid-column: 1 / -1; }
+  }
+  @media (max-width: 480px) {
+    .eet-orbit { grid-template-columns: 1fr; max-width: 360px; }
+    .eet-orbit-tag { padding: 16px 18px; font-size: 12.5px; }
   }
 
   .eet-testimonials { padding: 6px 0 12px; }
@@ -366,6 +475,25 @@
             <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
               <div class="wistia_embed wistia_async_1lq4agqnsl seo=true videoFoam=true playButton=true smallPlayButton=true playbar=true fullscreenButton=true volumeControl=true autoPlay=false muted=true" style="height:100%;position:relative;width:100%">&nbsp;</div>
             </div>
+            <!-- Custom click-to-play poster overlay -->
+            <div class="eet-vsl-poster" id="eetVslPoster" role="button" tabindex="0" aria-label="Play video">
+              <span class="corner tl"></span>
+              <span class="corner tr"></span>
+              <span class="corner bl"></span>
+              <span class="corner br"></span>
+              <div class="eet-vsl-poster-content">
+                <span class="eet-vsl-poster-eyebrow">The Exact System</span>
+                <h3>How I Built A <span class="accent">6-Figure Epoxy Business</span><br/>From $0 In One Year</h3>
+                <p>Watch the 7-minute breakdown of the install system, the pricing formulas, and the 30-day launch play that's gotten students paid in 9 days.</p>
+                <div class="eet-vsl-poster-meta">
+                  <span>44 HD Lessons</span>
+                  <span>Lifetime Access</span>
+                  <span>60-Day Guarantee</span>
+                </div>
+                <button type="button" class="eet-vsl-play" aria-label="Play video"></button>
+                <div class="eet-vsl-poster-cta">Press play to watch</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -449,61 +577,4 @@
 
   <template id="eet-legal-privacy"><h3>Privacy Policy</h3><div class="updated">Last updated: 2026</div><p>This Privacy Policy describes how Evergreen Epoxy Training ("we," "us," or "our") collects, uses, and protects the personal information of visitors and customers of evergreenepoxytraining.com.</p><h4>Information we collect</h4><ul><li>Name and email address you submit to opt in or enroll.</li><li>Billing details (processed by our payment processor; we do not store full card numbers).</li><li>Order and account history once you enroll.</li><li>Standard analytics data (pages visited, device, IP, referrer) collected automatically.</li></ul><h4>How we use it</h4><ul><li>To deliver the course and your purchase.</li><li>To send order receipts, course updates, and educational emails.</li><li>To improve the Site and our marketing.</li><li>To comply with legal obligations.</li></ul><h4>Third parties</h4><p>We use Kajabi to host the course and our payment processor (Stripe and/or PayPal) to process payments.</p><h4>Cookies</h4><p>We use cookies to remember preferences, measure traffic, and run advertising. You can disable cookies in your browser.</p><h4>Your rights</h4><p>You may request access, correction, or deletion of your personal information by emailing <a href="mailto:sales@evergreenepoxyflooring.com">sales@evergreenepoxyflooring.com</a>. We do not sell your personal information.</p><h4>Children</h4><p>The Site is not directed to children under 13.</p><h4>Contact</h4><p><a href="mailto:sales@evergreenepoxyflooring.com">sales@evergreenepoxyflooring.com</a></p></template>
 
-  <template id="eet-legal-terms"><h3>Terms of Service</h3><div class="updated">Last updated: 2026</div><p>By accessing or purchasing from evergreenepoxytraining.com, you agree to these Terms.</p><h4>Course access and license</h4><p>Upon enrollment you receive a personal, non-transferable license to access the course materials for your individual use. You may not record, redistribute, resell, or share course content.</p><h4>Lifetime access</h4><p>"Lifetime access" means access for as long as Evergreen Epoxy Training operates the Site and the course product.</p><h4>Refund policy</h4><p>We offer a 60-day money-back guarantee. To qualify you must demonstrate that you went through the course material and applied the steps. This is not an unconditional refund.</p><h4>Payment plans</h4><p>If you select a payment plan, you authorize us to charge the agreed amount on the agreed schedule until paid in full.</p><h4>No professional advice</h4><p>The course is for educational purposes only and is not legal, tax, financial, accounting, or business advice.</p><h4>Results not guaranteed</h4><p>Earnings or business outcomes shown are exceptional and not typical. We make no guarantee of any specific result.</p><h4>Limitation of liability</h4><p>To the maximum extent permitted by law, Evergreen Epoxy Training is not liable for indirect, incidental, special, consequential, or punitive damages.</p><h4>Intellectual property</h4><p>All content is owned by Evergreen Epoxy Training. You may not copy, modify, or create derivative works without written permission.</p><h4>Governing law</h4><p>These Terms are governed by the laws of the state where Evergreen Epoxy Training is registered.</p><h4>Contact</h4><p><a href="mailto:sales@evergreenepoxyflooring.com">sales@evergreenepoxyflooring.com</a></p></template>
-
-  <template id="eet-legal-disclaimer"><h3>Disclaimer</h3><div class="updated">Last updated: 2026</div><h4>Educational content only</h4><p>The information, videos, and materials are provided for general educational purposes only.</p><h4>No professional relationship</h4><p>No attorney-client, accountant-client, or other professional relationship is formed by your purchase of the course or use of the Site.</p><h4>Trade and safety</h4><p>Epoxy floor coatings involve power tools, chemicals, and physically demanding work. Always follow manufacturer instructions and required PPE.</p><h4>Testimonials</h4><p>Testimonials reflect actual experiences of selected students and are not guarantees of similar outcomes.</p><h4>No warranty</h4><p>The Site and course are provided "as is" without warranties of any kind.</p><h4>Contact</h4><p><a href="mailto:sales@evergreenepoxyflooring.com">sales@evergreenepoxyflooring.com</a></p></template>
-
-  <template id="eet-legal-earnings"><h3>Earnings Disclaimer</h3><div class="updated">Last updated: 2026</div><p>Evergreen Epoxy Training does not guarantee any income, revenue, or business outcome. Any income figures or student results are exceptional and not typical.</p><h4>Carson's results</h4><p>References to "$280K in year one" describe Carson Peters' personal experience. Your results will not be the same.</p><h4>Student results</h4><p>Most students who take the course will not match these specific outcomes.</p><h4>What affects your results</h4><ul><li>Your local market demand for epoxy flooring.</li><li>How quickly you take action and complete the course.</li><li>How much capital you invest in equipment, materials, and marketing.</li><li>Your existing skills, work ethic, sales ability, and business judgment.</li></ul><h4>Your responsibility</h4><p>You are responsible for the success or failure of your business decisions. Before making financial commitments, consult a qualified professional advisor.</p><h4>Contact</h4><p><a href="mailto:sales@evergreenepoxyflooring.com">sales@evergreenepoxyflooring.com</a></p></template>
-
-  <div class="eet-stickybar"><div class="info"><strong>Enroll Now</strong><br/>44 videos • Lifetime access</div><a class="eet-btn" href="https://www.evergreenepoxytraining.com/offers/cBPCe4h4/checkout">Enroll →</a></div>
-</div>
-
-<script>
-  (function(){
-    document.body.classList.add('eet-body');
-    document.querySelectorAll('.eet-faq-item .eet-faq-q').forEach(function(q){
-      q.addEventListener('click', function(){
-        var item = q.parentElement;
-        var open = item.classList.contains('open');
-        document.querySelectorAll('.eet-faq-item.open').forEach(function(o){ o.classList.remove('open'); });
-        if (!open) item.classList.add('open');
-      });
-    });
-    if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.12 });
-      document.querySelectorAll('.eet-reveal').forEach(function(el){ io.observe(el); });
-    } else { document.querySelectorAll('.eet-reveal').forEach(function(el){ el.classList.add('in'); }); }
-
-    function duplicateTrack(id){ var t = document.getElementById(id); if (!t) return; t.innerHTML = t.innerHTML + t.innerHTML; }
-    duplicateTrack('eetStatesTrack');
-    duplicateTrack('eetTestTrack');
-    // Stats track only duplicates on mobile (where it becomes a marquee)
-    if (window.matchMedia('(max-width: 720px)').matches) {
-      duplicateTrack('eetStatsTrack');
-    }
-
-    function animateCount(el, finalText){
-      var rangeMatch = finalText.match(/^([^0-9]*)([0-9]+)([^0-9]+)([0-9]+)([^0-9]*)$/);
-      if (rangeMatch) {
-        var p1 = rangeMatch[1], n1 = parseInt(rangeMatch[2],10), sep = rangeMatch[3], n2 = parseInt(rangeMatch[4],10), sf = rangeMatch[5];
-        var dur = 1400, t0 = performance.now();
-        function tick(now){ var p = Math.min(1, (now - t0)/dur); p = 1 - Math.pow(1-p, 3); el.textContent = p1 + Math.round(n1*p) + sep + Math.round(n2*p) + sf; if (p < 1) requestAnimationFrame(tick); else el.textContent = finalText; }
-        requestAnimationFrame(tick); return;
-      }
-      var match = finalText.match(/^([^0-9-]*)([0-9]+(?:\.[0-9]+)?)([^0-9]*)$/);
-      if (!match) { el.textContent = finalText; return; }
-      var prefix = match[1], n = parseFloat(match[2]), suffix = match[3];
-      var dur = 1400, t0 = performance.now();
-      function tick(now){ var p = Math.min(1, (now - t0)/dur); p = 1 - Math.pow(1-p, 3); var val = n * p; var rounded = (n % 1 === 0) ? Math.round(val) : val.toFixed(1); el.textContent = prefix + rounded + suffix; if (p < 1) requestAnimationFrame(tick); else el.textContent = finalText; }
-      requestAnimationFrame(tick);
-    }
-
-    var modalRoot = document.getElementById('eetModal');
-    var modalBody = document.getElementById('eetModalBody');
-    function openLegal(name){ var tpl = document.getElementById('eet-legal-' + name); if (!tpl || !modalRoot) return; modalBody.innerHTML = ''; modalBody.appendChild(tpl.content.cloneNode(true)); modalRoot.classList.add('open'); modalRoot.scrollTop = 0; document.body.style.overflow = 'hidden'; }
-    function closeLegal(){ modalRoot.classList.remove('open'); document.body.style.overflow = ''; }
-    document.querySelectorAll('[data-eet-legal]').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); openLegal(a.getA
+  <template id="eet-legal-terms"><h3>Terms of Service</h3><div class="updated">Last updated: 2026</div><p>By accessing or purchasing from evergreenepoxytraining.com, you agree to these Terms.</p><h4>Course access and license</h4><p>Upon enrollment you receive a personal, non-transferable license to access the course materials for your individual use. You may not record, redistribute, resell, or share course content.</p><h4>Lifetime access</h4><p>"Lifetime access" means access for as long as Evergreen Epoxy Training operates the Site and the course product.</p><h4>Refund policy</h4><p>We offer a 60-day money-back guarantee. To qualify you must demonstrate that you went through the course material and applied the steps. This is not an unconditional refund.</p><h4>Payment plans</h4><p>If you select a payment plan, you authorize us to charge the agreed amount on the agreed schedule until paid in full.</p><h4>No professional advice</h4><p>The course is for educational purposes only and is not legal, tax, financial, accounting, or business advice.</p><h4>Results not guaranteed</h4><p>Earnings or business outcomes shown are exceptional and not typical. We make no guarantee of any specific result.</p><h4>Limitation of liability</h4><p>To the maximum extent permitted by law, Evergreen Epoxy Training is not liable for indirect, incidental, special, consequential, or punitive damages.</p><h4>Intellectual property</h4><p>All
