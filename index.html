@@ -51,15 +51,25 @@
   @media (max-width: 720px) { .eet-btn { width: auto; min-height: 50px; padding: 16px 28px; } .eet-btn-lg { width: 100%; max-width: 380px; padding: 18px 24px; font-size: 15px; } }
 
   .eet-nav { position: sticky; top: 0; z-index: 90; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); background: rgba(5,9,8,.72); border-bottom: 1px solid rgba(34,197,94,.12); }
-  .eet-nav-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 12px 32px; max-width: 1400px; margin: 0 auto; gap: 24px; }
-  .eet-nav-logo { display:flex; align-items:center; gap:10px; font-weight:800; font-size:17px; letter-spacing:.02em; justify-self: start; }
-  .eet-nav-logo img { width: 36px; height: 36px; border-radius: 8px; display:block; }
-  .eet-nav-logo .accent { color: var(--eet-green-bright); font-weight:800; margin: 0 4px; }
-  .eet-nav-links { display:flex; gap:32px; align-items:center; font-size:14px; color:#cdd5cf; justify-self: center; }
-  .eet-nav-links a { transition: color .15s ease; font-weight: 500; }
+  .eet-nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; max-width: 1400px; margin: 0 auto; gap: 16px; }
+  .eet-nav-logo { display:flex; align-items:center; gap:10px; font-weight:800; font-size:17px; letter-spacing:.02em; flex-shrink: 0; min-width: 0; }
+  .eet-nav-logo img { width: 36px; height: 36px; border-radius: 8px; display:block; flex: none; }
+  .eet-nav-logo > span { white-space: nowrap; }
+  .eet-nav-logo .accent { color: var(--eet-green-bright); font-weight:800; }
+  .eet-nav-links { display:flex; gap: 28px; align-items:center; font-size:14px; color:#cdd5cf; flex: 1; justify-content: center; }
+  .eet-nav-links a { transition: color .15s ease; font-weight: 500; white-space: nowrap; }
   .eet-nav-links a:hover { color: var(--eet-green-bright); }
-  .eet-nav-cta { padding:10px 22px; font-size:13px; justify-self: end; }
-  @media (max-width: 820px) { .eet-nav-inner { grid-template-columns: 1fr auto; } .eet-nav-links { display:none; } .eet-nav-logo { font-size: 15px; } }
+  .eet-nav-cta { padding:10px 20px; font-size:13px; flex-shrink: 0; }
+  @media (max-width: 1000px) {
+    .eet-nav-links { display: none; }
+    .eet-nav-inner { justify-content: space-between; }
+  }
+  @media (max-width: 520px) {
+    .eet-nav-inner { padding: 10px 14px; gap: 10px; }
+    .eet-nav-logo { font-size: 14px; gap: 8px; }
+    .eet-nav-logo img { width: 30px; height: 30px; }
+    .eet-nav-cta { padding: 9px 14px; font-size: 12px; letter-spacing: 0.02em; }
+  }
 
   .eet-hero { position: relative; padding: 88px 0 56px; text-align: center; overflow: hidden; }
   @media (max-width: 720px) { .eet-hero { padding: 56px 0 36px; } }
@@ -84,9 +94,9 @@
   .eet-trust-divider { height:1px; max-width:980px; margin: 36px auto 0; background: linear-gradient(90deg, transparent, rgba(34,197,94,.4), transparent); }
 
   .eet-stats { padding: 36px 0 80px; }
-  .eet-stats-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1080px; margin: 0 auto; }
-  @media (max-width: 880px) { .eet-stats-grid { grid-template-columns: repeat(2, 1fr); } }
-  .eet-stat { background: linear-gradient(180deg, rgba(20,32,24,.85), rgba(10,16,12,.6)); border: 1px solid var(--eet-card-border); border-radius: 18px; padding: 28px 24px; min-height: 150px; transition: transform .25s ease, border-color .25s ease; }
+  .eet-stats-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; max-width: 1080px; margin: 0 auto; }
+  .eet-stat { background: linear-gradient(180deg, rgba(20,32,24,.85), rgba(10,16,12,.6)); border: 1px solid var(--eet-card-border); border-radius: 18px; padding: 28px 22px; min-height: 150px; min-width: 0; transition: transform .25s ease, border-color .25s ease; }
+  .eet-stat-value { word-break: keep-all; }
   .eet-stat:hover { transform: translateY(-3px); border-color: rgba(34,197,94,.42); }
   .eet-stat-label { color:#fff; font-size:14px; font-weight:600; letter-spacing:.02em; }
   .eet-stat-value { margin-top: 12px; font-size: clamp(34px, 4vw, 52px); font-weight: 800; color: var(--eet-green-bright); letter-spacing: -0.02em; }
@@ -100,8 +110,7 @@
   .eet-statement p { margin-top: 18px; color: var(--eet-mute); font-size: clamp(15px, 1.5vw, 18px); max-width: 720px; margin-left: auto; margin-right: auto; line-height: 1.55; }
 
   .eet-threecol { padding: 40px 0 60px; }
-  .eet-threecol-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 1180px; margin: 0 auto; }
-  @media (max-width: 920px) { .eet-threecol-grid { grid-template-columns: 1fr; } }
+  .eet-threecol-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; max-width: 1180px; margin: 0 auto; }
   .eet-card { background: radial-gradient(120% 100% at 50% 0%, rgba(20,83,45,.18) 0%, rgba(10,16,12,.7) 60%); border: 1px solid var(--eet-card-border); border-radius: 22px; padding: 36px 32px; text-align: center; transition: transform .25s ease, border-color .25s ease, box-shadow .35s ease; }
   .eet-card:hover { transform: translateY(-4px); border-color: rgba(34,197,94,.4); box-shadow: 0 20px 50px rgba(34,197,94,.08); }
   .eet-card-icon { width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(135deg, rgba(34,197,94,.18), rgba(20,83,45,.5)); border: 1px solid rgba(34,197,94,.3); display: grid; place-items: center; margin: 0 auto 20px; color: var(--eet-green-bright); font-size: 24px; }
@@ -192,8 +201,7 @@
   .eet-bignum-cta { margin-top: 32px; }
 
   .eet-foot { padding: 56px 0 32px; background: #050908; border-top: 1px solid rgba(34,197,94,.12); }
-  .eet-foot-grid { display:grid; grid-template-columns: 1fr 1fr 1fr 2fr; gap: 32px; max-width: 1240px; margin: 0 auto; padding: 0 32px; }
-  @media (max-width: 820px) { .eet-foot-grid { grid-template-columns: 1fr 1fr; } }
+  .eet-foot-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 28px; max-width: 1240px; margin: 0 auto; padding: 0 32px; }
   .eet-foot-col h4 { color: var(--eet-green-bright); font-size: 14px; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 14px; }
   .eet-foot-col a { display:block; color:#cdd5cf; font-size: 14px; margin: 8px 0; cursor: pointer; }
   .eet-foot-col a:hover { color: var(--eet-green-bright); }
@@ -493,11 +501,4 @@
             seen.add(e.target);
             var finalText = e.target.dataset.final || e.target.textContent.trim();
             e.target.dataset.final = finalText;
-            animateCount(e.target, finalText);
-          }
-        });
-      }, { threshold: 0.5 });
-      document.querySelectorAll('.eet-stat-value').forEach(function(el){ statIo.observe(el); });
-    }
-  })();
-</script>
+            animateCount(e.ta
