@@ -1,0 +1,503 @@
+<!-- =====================================================================
+     EVERGREEN EPOXY TRAINING — VSL Landing Page
+     Layout cloned 1:1 from viralcoach.com / Color palette: green + black
+     Drop into a Kajabi "Custom Code" page. Set as homepage.
+     All CTAs route to the existing Kajabi checkout offers.
+     ===================================================================== -->
+<style>
+  /* ---------- RESET / BASE ---------- */
+  html { scroll-behavior: smooth; }
+  html, body { margin:0; padding:0; }
+  *, *::before, *::after { box-sizing: border-box; }
+  body.eet-body {
+    background: radial-gradient(50% 50% at 50% 50%, #0a2818 0%, #010101 100%);
+    color: #e8efe9;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .eet-wrap { font-family: 'Inter', sans-serif; }
+  .eet-wrap a { color: inherit; text-decoration: none; }
+  .eet-wrap img { max-width: 100%; display: block; }
+  .eet-wrap h1, .eet-wrap h2, .eet-wrap h3, .eet-wrap h4 { margin:0; font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; }
+  .eet-wrap p { margin: 0; line-height: 1.55; }
+  .eet-serif { font-family: 'Playfair Display', 'Georgia', serif; font-style: italic; font-weight: 600; }
+  .eet-container { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  @media (max-width: 720px) { .eet-container { padding: 0 18px; } }
+
+  :root {
+    --eet-green: #22c55e; --eet-green-bright: #34d97a; --eet-green-dark: #14532d;
+    --eet-green-darker: #0a2818; --eet-bg: #050908;
+    --eet-card: rgba(20, 32, 24, 0.65); --eet-card-border: rgba(34, 197, 94, 0.18);
+    --eet-text: #e8efe9; --eet-mute: #98a39b;
+  }
+
+  .eet-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 16px 36px; font-weight: 700; font-size: 15px;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    border-radius: 999px; cursor: pointer; border: 0;
+    transition: transform .15s ease, box-shadow .25s ease, filter .15s ease;
+    color: #04130a; background: linear-gradient(180deg, #34d97a 0%, #15a04a 100%);
+    box-shadow: 0 12px 30px rgba(34,197,94,.28), inset 0 1px 0 rgba(255,255,255,.25);
+    white-space: nowrap; position: relative; overflow: hidden;
+  }
+  .eet-btn:hover { transform: translateY(-1px); filter: brightness(1.08); box-shadow: 0 18px 40px rgba(34,197,94,.42), inset 0 1px 0 rgba(255,255,255,.3); }
+  .eet-btn::after { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%); transform: translateX(-100%); transition: transform .6s ease; }
+  .eet-btn:hover::after { transform: translateX(100%); }
+  .eet-btn-ghost { color: var(--eet-green-bright); background: transparent; border: 1.5px solid var(--eet-green); box-shadow: none; }
+  .eet-btn-ghost:hover { background: rgba(34,197,94,.08); }
+  .eet-btn-lg { padding: 20px 48px; font-size: 16px; min-height: 48px; }
+  @media (max-width: 720px) { .eet-btn { width: auto; min-height: 50px; padding: 16px 28px; } .eet-btn-lg { width: 100%; max-width: 380px; padding: 18px 24px; font-size: 15px; } }
+
+  .eet-nav { position: sticky; top: 0; z-index: 90; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); background: rgba(5,9,8,.72); border-bottom: 1px solid rgba(34,197,94,.12); }
+  .eet-nav-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 12px 32px; max-width: 1400px; margin: 0 auto; gap: 24px; }
+  .eet-nav-logo { display:flex; align-items:center; gap:10px; font-weight:800; font-size:17px; letter-spacing:.02em; justify-self: start; }
+  .eet-nav-logo img { width: 36px; height: 36px; border-radius: 8px; display:block; }
+  .eet-nav-logo .accent { color: var(--eet-green-bright); font-weight:800; margin: 0 4px; }
+  .eet-nav-links { display:flex; gap:32px; align-items:center; font-size:14px; color:#cdd5cf; justify-self: center; }
+  .eet-nav-links a { transition: color .15s ease; font-weight: 500; }
+  .eet-nav-links a:hover { color: var(--eet-green-bright); }
+  .eet-nav-cta { padding:10px 22px; font-size:13px; justify-self: end; }
+  @media (max-width: 820px) { .eet-nav-inner { grid-template-columns: 1fr auto; } .eet-nav-links { display:none; } .eet-nav-logo { font-size: 15px; } }
+
+  .eet-hero { position: relative; padding: 88px 0 56px; text-align: center; overflow: hidden; }
+  @media (max-width: 720px) { .eet-hero { padding: 56px 0 36px; } }
+  .eet-hero::before { content: ''; position: absolute; inset: -50% -10% auto -10%; height: 110%; background: radial-gradient(60% 50% at 50% 30%, rgba(34,197,94,.18) 0%, transparent 60%), radial-gradient(40% 30% at 20% 60%, rgba(20,83,45,.35) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+  .eet-hero::after { content: ''; position: absolute; left: 0; right: 0; top: 30%; height: 1px; background: linear-gradient(90deg, transparent, rgba(34,197,94,.35), transparent); transform: rotate(-2deg); opacity: .6; pointer-events:none; }
+  .eet-hero-inner { position: relative; z-index: 2; }
+  .eet-hero h1 { font-size: clamp(40px, 6vw, 76px); color: #fff; max-width: 980px; margin: 0 auto; }
+  .eet-hero h1 .eet-serif { color: #fff; font-weight: 600; }
+  .eet-hero-sub { margin-top: 26px; color: var(--eet-green-bright); font-size: clamp(15px, 1.5vw, 18px); font-weight: 500; letter-spacing: 0.01em; }
+  .eet-hero-cta { margin-top: 36px; }
+
+  .eet-trust { padding: 56px 0 24px; text-align:center; position: relative; z-index: 2; }
+  .eet-trust-label { color:#fff; font-weight:700; font-size:14px; letter-spacing:.02em; }
+  .eet-marquee { margin-top: 24px; overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%); }
+  .eet-marquee-track { display: flex; gap: 64px; width: max-content; animation: eet-marq 35s linear infinite; align-items: center; }
+  .eet-marquee:hover .eet-marquee-track { animation-play-state: paused; }
+  @keyframes eet-marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .eet-trust-item { color:#cdd5cf; font-weight:700; letter-spacing:.06em; font-size:15px; text-transform: uppercase; white-space: nowrap; opacity: .85; transition: color .2s ease, opacity .2s ease; }
+  .eet-trust-item:hover { color: var(--eet-green-bright); opacity: 1; }
+  .eet-trust-item.lg { font-size: 19px; }
+  .eet-trust-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(34,197,94,.5); flex: none; }
+  .eet-trust-divider { height:1px; max-width:980px; margin: 36px auto 0; background: linear-gradient(90deg, transparent, rgba(34,197,94,.4), transparent); }
+
+  .eet-stats { padding: 36px 0 80px; }
+  .eet-stats-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1080px; margin: 0 auto; }
+  @media (max-width: 880px) { .eet-stats-grid { grid-template-columns: repeat(2, 1fr); } }
+  .eet-stat { background: linear-gradient(180deg, rgba(20,32,24,.85), rgba(10,16,12,.6)); border: 1px solid var(--eet-card-border); border-radius: 18px; padding: 28px 24px; min-height: 150px; transition: transform .25s ease, border-color .25s ease; }
+  .eet-stat:hover { transform: translateY(-3px); border-color: rgba(34,197,94,.42); }
+  .eet-stat-label { color:#fff; font-size:14px; font-weight:600; letter-spacing:.02em; }
+  .eet-stat-value { margin-top: 12px; font-size: clamp(34px, 4vw, 52px); font-weight: 800; color: var(--eet-green-bright); letter-spacing: -0.02em; }
+  .eet-stat-desc { margin-top: 8px; color: var(--eet-mute); font-size: 13.5px; line-height: 1.5; }
+
+  .eet-statement { padding: 70px 0 50px; text-align:center; position:relative; }
+  .eet-statement::before { content: ''; position: absolute; left:50%; top: 24px; transform: translateX(-50%); width: 56px; height: 2px; background: linear-gradient(90deg, transparent, var(--eet-green-bright), transparent); }
+  .eet-statement-eyebrow { display: inline-block; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--eet-green-bright); font-weight: 700; padding: 8px 16px; border: 1px solid rgba(34,197,94,.32); border-radius: 999px; background: rgba(34,197,94,.06); margin-bottom: 22px; }
+  .eet-statement h2 { font-size: clamp(28px, 4vw, 48px); line-height: 1.18; color: #fff; max-width: 920px; margin: 0 auto; letter-spacing: -0.015em; }
+  .eet-statement h2 .eet-serif { color: var(--eet-green-bright); font-weight: 600; }
+  .eet-statement p { margin-top: 18px; color: var(--eet-mute); font-size: clamp(15px, 1.5vw, 18px); max-width: 720px; margin-left: auto; margin-right: auto; line-height: 1.55; }
+
+  .eet-threecol { padding: 40px 0 60px; }
+  .eet-threecol-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 1180px; margin: 0 auto; }
+  @media (max-width: 920px) { .eet-threecol-grid { grid-template-columns: 1fr; } }
+  .eet-card { background: radial-gradient(120% 100% at 50% 0%, rgba(20,83,45,.18) 0%, rgba(10,16,12,.7) 60%); border: 1px solid var(--eet-card-border); border-radius: 22px; padding: 36px 32px; text-align: center; transition: transform .25s ease, border-color .25s ease, box-shadow .35s ease; }
+  .eet-card:hover { transform: translateY(-4px); border-color: rgba(34,197,94,.4); box-shadow: 0 20px 50px rgba(34,197,94,.08); }
+  .eet-card-icon { width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(135deg, rgba(34,197,94,.18), rgba(20,83,45,.5)); border: 1px solid rgba(34,197,94,.3); display: grid; place-items: center; margin: 0 auto 20px; color: var(--eet-green-bright); font-size: 24px; }
+  .eet-card h3 { color:#fff; font-size: 20px; }
+  .eet-card p { margin-top: 14px; color: var(--eet-mute); font-size: 15px; }
+
+  .eet-badges { padding: 24px 0 60px; }
+  .eet-badges-row { display:flex; justify-content:center; gap: 14px; flex-wrap: wrap; }
+  .eet-badge { border-radius: 14px; padding: 18px 28px; min-width: 200px; color: #fff; font-weight: 700; display:flex; align-items:center; justify-content:space-between; gap: 14px; }
+  .eet-badge .label { font-size: 14px; letter-spacing:.08em; text-transform: uppercase; opacity: .85; }
+  .eet-badge .score { font-size: 26px; }
+  .eet-badge.green { background: linear-gradient(135deg, #14532d, #0a2818); border: 1px solid rgba(34,197,94,.45); }
+  .eet-badge.dark  { background: linear-gradient(135deg, #1f2d24, #0c1410); border: 1px solid rgba(34,197,94,.25); }
+  .eet-badge.deep  { background: linear-gradient(135deg, #07331a, #04200f); border: 1px solid rgba(34,197,94,.35); }
+  .eet-badge .icon { color: var(--eet-green-bright); font-size: 22px; }
+
+  .eet-vsl-wrap { padding: 16px 0 40px; position: relative; }
+  .eet-vsl-frame { max-width: 1080px; margin: 0 auto; padding: 14px; background: linear-gradient(180deg, rgba(20,83,45,.15), rgba(10,16,12,.4)); border: 1px solid var(--eet-card-border); border-radius: 22px; position: relative; }
+  .eet-vsl-tag-left, .eet-vsl-tag-right { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(10,16,12,.92); border: 1px solid rgba(34,197,94,.4); color:#fff; padding: 14px 22px; border-radius: 12px; font-weight: 700; font-size: 15px; box-shadow: 0 12px 30px rgba(0,0,0,.5); z-index: 5; }
+  .eet-vsl-tag-left  { left: -120px; animation: eet-float 8s ease-in-out infinite; }
+  .eet-vsl-tag-right { right: -160px; text-align:right; max-width:240px; line-height:1.3; animation: eet-float 9s ease-in-out infinite -2s; }
+  .eet-vsl-tag-left strong, .eet-vsl-tag-right strong { color: var(--eet-green-bright); }
+  @media (max-width: 1100px) { .eet-vsl-tag-left, .eet-vsl-tag-right { display: none; } }
+  .eet-vsl-video { position: relative; width: 100%; border-radius: 14px; overflow: hidden; background: #000; }
+  .eet-vsl-cta { text-align:center; margin-top: 32px; }
+
+  .eet-system { padding: 72px 0 4px; text-align:center; position: relative; }
+  .eet-system::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(34,197,94,.4), transparent); }
+  .eet-system h2 { color:#fff; font-size: clamp(24px, 3vw, 36px); max-width: 720px; margin: 0 auto; }
+  .eet-orbit { position: relative; width: min(900px, 95%); aspect-ratio: 1.5 / 1; margin: 56px auto 0; }
+  .eet-orbit-ring { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(440px, 60%); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, rgba(34,197,94,.0) 60%, rgba(34,197,94,.18) 70%, transparent 76%), conic-gradient(from 0deg, rgba(34,197,94,.0), rgba(34,197,94,.5), rgba(34,197,94,.0), rgba(34,197,94,.4), rgba(34,197,94,.0)); filter: blur(.4px); animation: eet-spin 28s linear infinite; }
+  .eet-orbit-dots { position:absolute; left:50%; top:50%; transform: translate(-50%,-50%); width: min(440px,60%); aspect-ratio:1; border-radius:50%; border: 1px dashed rgba(34,197,94,.22); }
+  @keyframes eet-spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+  .eet-orbit-core { position:absolute; left:50%; top:50%; transform: translate(-50%,-50%); width: 130px; height: 130px; border-radius: 24px; background: linear-gradient(135deg, #062815, #0a2818); border: 1px solid rgba(34,197,94,.4); display:grid; place-items:center; box-shadow: 0 0 60px rgba(34,197,94,.25); color: var(--eet-green-bright); font-weight: 800; font-size: 14px; letter-spacing: .04em; text-align:center; padding: 12px; z-index: 3; animation: eet-pulse 4.5s ease-in-out infinite; }
+  .eet-orbit-core small { display:block; font-size:11px; letter-spacing:.12em; color:#fff; opacity:.7; }
+  @keyframes eet-pulse { 0%, 100% { box-shadow: 0 0 60px rgba(34,197,94,.25); } 50% { box-shadow: 0 0 90px rgba(34,197,94,.55); } }
+  .eet-orbit-tag { position:absolute; padding: 12px 18px; border-radius: 10px; background: linear-gradient(180deg, rgba(20,32,24,.95), rgba(10,16,12,.95)); border: 1px solid rgba(34,197,94,.32); color:#fff; font-weight:700; font-size: 13.5px; text-transform: uppercase; letter-spacing:.05em; white-space: nowrap; box-shadow: 0 10px 30px rgba(0,0,0,.4); animation: eet-float 7s ease-in-out infinite; }
+  .eet-orbit-tag.t  { top: 0%;  left: 50%; transform: translateX(-50%); }
+  .eet-orbit-tag.tl { top: 14%; left: 4%; animation-delay: -.4s; }
+  .eet-orbit-tag.tr { top: 14%; right: 4%; animation-delay: -1.2s; }
+  .eet-orbit-tag.ml { top: 46%; left: 0%; transform: translateY(-50%); animation-delay: -2.0s; }
+  .eet-orbit-tag.mr { top: 46%; right: 0%; transform: translateY(-50%); animation-delay: -2.8s; }
+  .eet-orbit-tag.bl { bottom: 14%; left: 4%; animation-delay: -3.6s; }
+  .eet-orbit-tag.br { bottom: 14%; right: 4%; animation-delay: -4.4s; }
+  .eet-orbit-tag.b  { bottom: 0%; left: 50%; transform: translateX(-50%); animation-delay: -5.7s; }
+  @keyframes eet-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+  @media (max-width: 720px) {
+    .eet-orbit { aspect-ratio: auto; min-height: 0; padding: 8px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 460px; }
+    .eet-orbit-tag { position: static; display: block; margin: 0; transform: none; text-align: center; white-space: normal; padding: 16px 18px; font-size: 13px; }
+    .eet-orbit-ring, .eet-orbit-dots { display:none; }
+    .eet-orbit-core { position: relative; left: auto; top: auto; transform: none; margin: 0 auto 18px; width: 110px; height: 110px; }
+    .eet-orbit .eet-orbit-core { grid-column: 1 / -1; }
+  }
+
+  .eet-testimonials { padding: 6px 0 12px; }
+  .eet-test-marquee { overflow: hidden; padding: 2px 0; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%); }
+  .eet-test-track { display: flex; gap: 18px; width: max-content; animation: eet-marq 60s linear infinite; }
+  .eet-test-marquee:hover .eet-test-track { animation-play-state: paused; }
+  .eet-test-card { flex: 0 0 380px; max-width: 380px; background: linear-gradient(180deg, rgba(15,30,20,.7), rgba(8,14,11,.7)); border: 1px solid var(--eet-card-border); border-radius: 18px; padding: 28px; transition: border-color .25s ease, transform .25s ease, box-shadow .35s ease; }
+  @media (max-width: 720px) { .eet-test-card { flex: 0 0 86vw; max-width: 86vw; } }
+  .eet-test-card:hover { border-color: rgba(34,197,94,.45); transform: translateY(-2px); box-shadow: 0 18px 40px rgba(34,197,94,.08); }
+  .eet-test-card .stars { color: var(--eet-green-bright); letter-spacing: 2px; font-size: 14px; }
+  .eet-test-card .quote { color:#fff; font-size: 15px; line-height: 1.55; margin-top: 12px; }
+  .eet-test-author { display:flex; align-items:center; gap: 12px; margin-top: 22px; }
+  .eet-test-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #22c55e, #14532d); display:grid; place-items:center; color:#04130a; font-weight:800; font-size:14px; }
+  .eet-test-name { color:#fff; font-weight: 700; font-size: 14px; }
+  .eet-test-role { color: var(--eet-mute); font-size: 13px; }
+  .eet-test-cta { text-align:center; margin-top: 12px; }
+
+  .eet-faq { padding: 80px 0 48px; }
+  .eet-faq h2 { text-align:center; color:#fff; font-size: clamp(28px, 3vw, 38px); }
+  .eet-faq h2 .eet-serif { color: var(--eet-green-bright); }
+  .eet-faq-list { max-width: 880px; margin: 36px auto 0; }
+  .eet-faq-item { border-bottom: 1px solid rgba(34,197,94,.14); padding: 22px 8px; }
+  .eet-faq-q { display:flex; justify-content:space-between; align-items:center; gap: 16px; color:#fff; font-weight: 700; font-size: 17px; cursor:pointer; user-select:none; }
+  .eet-faq-q::after { content: '+'; color: var(--eet-green-bright); font-size: 26px; line-height: 1; transition: transform .2s ease; }
+  .eet-faq-item.open .eet-faq-q::after { transform: rotate(45deg); }
+  .eet-faq-a { max-height: 0; overflow: hidden; color: var(--eet-mute); transition: max-height .35s ease, margin-top .25s ease; font-size: 15px; line-height: 1.6; }
+  .eet-faq-item.open .eet-faq-a { max-height: 600px; margin-top: 14px; }
+
+  .eet-bignum { position: relative; padding: 90px 0; text-align:center; overflow:hidden; }
+  .eet-bignum::before { content: '$280,000'; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(80px, 22vw, 360px); color: rgba(34,197,94,.05); white-space: nowrap; letter-spacing: -.04em; pointer-events:none; }
+  @media (max-width: 720px) { .eet-bignum { padding: 60px 0; } .eet-bignum-cta a + a { margin-top: 12px; } .eet-bignum-cta { display: flex; flex-direction: column; gap: 10px; align-items: center; } }
+  .eet-bignum-inner { position: relative; z-index: 2; }
+  .eet-bignum h2 { color:#fff; font-size: clamp(38px, 5.5vw, 72px); }
+  .eet-bignum h2 .eet-serif { color:#fff; }
+  .eet-bignum h2 .dot { color: var(--eet-green-bright); }
+  .eet-bignum-cta { margin-top: 32px; }
+
+  .eet-foot { padding: 56px 0 32px; background: #050908; border-top: 1px solid rgba(34,197,94,.12); }
+  .eet-foot-grid { display:grid; grid-template-columns: 1fr 1fr 1fr 2fr; gap: 32px; max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  @media (max-width: 820px) { .eet-foot-grid { grid-template-columns: 1fr 1fr; } }
+  .eet-foot-col h4 { color: var(--eet-green-bright); font-size: 14px; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 14px; }
+  .eet-foot-col a { display:block; color:#cdd5cf; font-size: 14px; margin: 8px 0; cursor: pointer; }
+  .eet-foot-col a:hover { color: var(--eet-green-bright); }
+  .eet-foot-disc { color: var(--eet-mute); font-size: 12.5px; line-height: 1.6; }
+  .eet-foot-bot { max-width: 1240px; margin: 28px auto 0; padding: 18px 32px 0; border-top: 1px solid rgba(34,197,94,.1); display:flex; justify-content:space-between; flex-wrap: wrap; gap: 12px; color: var(--eet-mute); font-size: 13px; }
+
+  .eet-stickybar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; background: rgba(5,9,8,.95); border-top: 1px solid rgba(34,197,94,.25); backdrop-filter: blur(10px); padding: 12px 16px; display: none; justify-content: space-between; align-items: center; gap: 12px; }
+  @media (max-width: 720px) { .eet-stickybar { display: flex; } body.eet-body { padding-bottom: 76px; } }
+  .eet-stickybar .info { color:#fff; font-size: 13px; line-height:1.3; }
+  .eet-stickybar .info strong { color: var(--eet-green-bright); }
+  .eet-stickybar .eet-btn { padding: 12px 22px; font-size: 13px; }
+
+  .eet-reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+  .eet-reveal.in { opacity: 1; transform: translateY(0); }
+
+  .eet-hero h1, .eet-hero-sub, .eet-hero-cta { opacity: 0; transform: translateY(28px); animation: eet-rise .9s cubic-bezier(.2,.8,.2,1) forwards; }
+  .eet-hero h1      { animation-delay: 0.05s; }
+  .eet-hero-sub     { animation-delay: 0.25s; }
+  .eet-hero-cta     { animation-delay: 0.45s; }
+  @keyframes eet-rise { to { opacity: 1; transform: translateY(0); } }
+
+  .eet-modal-backdrop { position: fixed; inset: 0; background: rgba(2,8,5,.78); backdrop-filter: blur(6px); z-index: 200; display: none; align-items: flex-start; justify-content: center; padding: 5vh 16px; overflow-y: auto; }
+  .eet-modal-backdrop.open { display: flex; }
+  .eet-modal { background: linear-gradient(180deg, #0a1a12, #050908); border: 1px solid rgba(34,197,94,.28); border-radius: 18px; max-width: 760px; width: 100%; color: #e8efe9; padding: 36px 40px 32px; box-shadow: 0 30px 80px rgba(0,0,0,.6); position: relative; max-height: 90vh; overflow-y: auto; }
+  @media (max-width: 720px) { .eet-modal { padding: 26px 22px; } }
+  .eet-modal h3 { color:#fff; font-size: 26px; margin-bottom: 6px; }
+  .eet-modal .updated { color: var(--eet-mute); font-size: 12.5px; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 18px; }
+  .eet-modal h4 { color: var(--eet-green-bright); font-size: 15px; margin: 22px 0 8px; letter-spacing:.02em; }
+  .eet-modal p, .eet-modal li { color: #cdd5cf; font-size: 14.5px; line-height: 1.65; }
+  .eet-modal p { margin: 8px 0; }
+  .eet-modal ul { padding-left: 20px; margin: 6px 0; }
+  .eet-modal li { margin: 4px 0; list-style: disc; }
+  .eet-modal a { color: var(--eet-green-bright); }
+  .eet-modal-close { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.06); border: 1px solid rgba(34,197,94,.25); color:#fff; font-size: 20px; cursor: pointer; line-height: 1; display: grid; place-items: center; }
+  .eet-modal-close:hover { background: rgba(34,197,94,.18); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .eet-marquee-track, .eet-test-track, .eet-orbit-ring, .eet-orbit-core, .eet-orbit-tag, .eet-vsl-tag-left, .eet-vsl-tag-right { animation: none !important; }
+    .eet-hero h1, .eet-hero-sub, .eet-hero-cta { animation: none !important; opacity: 1; transform: none; }
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+<script>document.body.classList.add('eet-body');</script>
+
+<div class="eet-wrap">
+  <nav class="eet-nav">
+    <div class="eet-nav-inner">
+      <a href="#" class="eet-nav-logo">
+        <img src="https://lh3.googleusercontent.com/d/1RfjxmBA4SokJbmNIkg6ilpD3-Q0Ap0go=s100" alt="Evergreen Epoxy Training" onerror="this.style.display='none';">
+        <span>Evergreen <span class="accent">Epoxy</span> Training</span>
+      </a>
+      <div class="eet-nav-links">
+        <a href="#system">The System</a>
+        <a href="#proof">Results</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a class="eet-btn eet-nav-cta" href="https://www.evergreenepoxytraining.com/offers/cBPCe4h4/checkout">Enroll Now</a>
+    </div>
+  </nav>
+
+  <section class="eet-hero">
+    <div class="eet-container eet-hero-inner">
+      <h1>Build A 6-Figure Epoxy Business <span class="eet-serif">From Day One</span></h1>
+      <div class="eet-hero-sub">Real installs. Real numbers. The exact system that took one 20-year-old from $0 to $280K in year one.</div>
+      <div class="eet-hero-cta"><a class="eet-btn eet-btn-lg" href="https://www.evergreenepoxytraining.com/offers/cBPCe4h4/checkout">Enroll Now</a></div>
+    </div>
+  </section>
+
+  <section class="eet-trust">
+    <div class="eet-container">
+      <div class="eet-trust-label">Real students running real epoxy businesses across:</div>
+      <div class="eet-marquee">
+        <div class="eet-marquee-track" id="eetStatesTrack">
+          <span class="eet-trust-item lg">TEXAS</span><span class="eet-trust-dot"></span>
+          <span class="eet-trust-item">FLORIDA</span><span class="eet-trust-dot"></span>
+          <span class="eet-trust-item lg">CALIFORNIA</span><span class="eet-trust-dot"></span>
+          <span class="eet-trust-item">GEORGIA</span><span class="eet-trust-dot"></span>
+          <span class="eet-trust-item lg">ARIZONA</span><span class="eet-trust-dot"></span>
+          <span class="eet-trust-item">OHIO</span><span class="eet-trust-dot"></span>
+          <span class="eet-trust-item lg">NEVADA</span><span class="eet-trust-dot"></span>
+          <span class="eet-trust-item">COLORADO</span><span class="eet-trust-dot"></span>
+          <span class="eet-trust-item lg">TENNESSEE</span><span class="eet-trust-dot"></span>
+          <span class="eet-trust-item">NORTH CAROLINA</span><span class="eet-trust-dot"></span>
+          <span class="eet-trust-item lg">WASHINGTON</span><span class="eet-trust-dot"></span>
+          <span class="eet-trust-item">MICHIGAN</span><span class="eet-trust-dot"></span>
+          <span class="eet-trust-item lg">PENNSYLVANIA</span><span class="eet-trust-dot"></span>
+          <span class="eet-trust-item">VIRGINIA</span><span class="eet-trust-dot"></span>
+        </div>
+      </div>
+      <div class="eet-trust-divider"></div>
+    </div>
+  </section>
+
+  <section class="eet-stats">
+    <div class="eet-container">
+      <div class="eet-stats-grid">
+        <div class="eet-stat eet-reveal"><div class="eet-stat-label">Year 1 Revenue</div><div class="eet-stat-value">$280K</div><div class="eet-stat-desc">What Carson did at age 20 with zero experience and no backing.</div></div>
+        <div class="eet-stat eet-reveal"><div class="eet-stat-label">500-Day Total</div><div class="eet-stat-value">$400K+</div><div class="eet-stat-desc">Total revenue in his first 500 days running Evergreen Epoxy.</div></div>
+        <div class="eet-stat eet-reveal"><div class="eet-stat-label">Per Job</div><div class="eet-stat-value">$5–50K</div><div class="eet-stat-desc">Typical revenue per single job — residential garages, full basements, and commercial pours.</div></div>
+        <div class="eet-stat eet-reveal"><div class="eet-stat-label">Industry</div><div class="eet-stat-value">$61B</div><div class="eet-stat-desc">Global flooring market by 2030. Demand outpacing every other trade.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="eet-statement">
+    <div class="eet-container">
+      <span class="eet-statement-eyebrow">The Opportunity</span>
+      <h2>Epoxy is the <span class="eet-serif">highest-margin trade</span><br/>most contractors still ignore.</h2>
+      <p>The work isn't the hard part. The pricing, the marketing, the business systems — that's where 90% of guys get stuck. This course solves all three.</p>
+    </div>
+  </section>
+
+  <section class="eet-threecol">
+    <div class="eet-container">
+      <div class="eet-threecol-grid">
+        <div class="eet-card eet-reveal"><div class="eet-card-icon">🛠️</div><h3>The work is simple. The pricing is what kills you.</h3><p>Most beginners undercharge by $1,000+ on every job. We give you the exact pricing formulas Carson uses on real jobs so you make money the first time you pour.</p></div>
+        <div class="eet-card eet-reveal"><div class="eet-card-icon">📈</div><h3>The trades are hungry for skilled crews.</h3><p>Garage epoxy alone is a $3–6K job that takes one day. Homeowners are searching for it right now in your zip code. The hard part isn't demand. It's knowing how to land the call.</p></div>
+        <div class="eet-card eet-reveal"><div class="eet-card-icon">🏆</div><h3>Most courses teach the technique. Few teach the business.</h3><p>We built Evergreen Epoxy to $280K in year one on the exact systems we now teach. We know what works because we already did it on real homes for real customers.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="eet-badges">
+    <div class="eet-container">
+      <div class="eet-badges-row">
+        <div class="eet-badge green"><div><div class="label">5-STAR REVIEWS</div><div class="score">4.9/5</div></div><div class="icon">★</div></div>
+        <div class="eet-badge dark"><div><div class="label">REAL STUDENTS</div><div class="score">500+</div></div><div class="icon">👥</div></div>
+        <div class="eet-badge deep"><div><div class="label">FIRST JOB</div><div class="score">&lt; 30 DAYS</div></div><div class="icon">⚡</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="eet-vsl-wrap">
+    <div class="eet-container">
+      <div class="eet-vsl-frame">
+        <div class="eet-vsl-tag-left"><strong>$280K</strong> in 12 months</div>
+        <div class="eet-vsl-tag-right"><strong>The complete</strong><br/>epoxy flooring business system</div>
+        <div class="eet-vsl-video">
+          <script src="https://fast.wistia.com/embed/medias/1lq4agqnsl.jsonp" async></script>
+          <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+          <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+            <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+              <div class="wistia_embed wistia_async_1lq4agqnsl seo=true videoFoam=true playButton=true smallPlayButton=true playbar=true fullscreenButton=true volumeControl=true autoPlay=false muted=true" style="height:100%;position:relative;width:100%">&nbsp;</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="eet-vsl-cta"><a class="eet-btn eet-btn-lg" href="https://www.evergreenepoxytraining.com/offers/cBPCe4h4/checkout">Enroll Now</a></div>
+    </div>
+  </section>
+
+  <section class="eet-system" id="system">
+    <div class="eet-container">
+      <h2>Your Entire Epoxy Business <span class="eet-serif" style="color:var(--eet-green-bright);">Under One Roof</span></h2>
+      <div class="eet-orbit">
+        <div class="eet-orbit-ring"></div>
+        <div class="eet-orbit-dots"></div>
+        <div class="eet-orbit-core">EVERGREEN<br/>EPOXY<br/><small>TRAINING</small></div>
+        <div class="eet-orbit-tag t">FLAKE FLOOR INSTALLATION</div>
+        <div class="eet-orbit-tag tl">METALLIC EPOXY</div>
+        <div class="eet-orbit-tag tr">CONCRETE OVERLAY</div>
+        <div class="eet-orbit-tag ml">PRICING & ESTIMATING</div>
+        <div class="eet-orbit-tag mr">CLIENT GETTING SYSTEMS</div>
+        <div class="eet-orbit-tag bl">FULL BUSINESS SEMINAR</div>
+        <div class="eet-orbit-tag br">CONTRACTS & DOCS</div>
+        <div class="eet-orbit-tag b">LIFETIME UPDATES</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="eet-testimonials" id="proof">
+    <div class="eet-test-marquee">
+      <div class="eet-test-track" id="eetTestTrack">
+        <div class="eet-test-card"><div class="stars">★★★★★</div><p class="quote">I went from working construction for $18/hour to making $12,000 in my second month of epoxy. This course is the real deal — every dollar I spent on it came back in the first job.</p><div class="eet-test-author"><div class="eet-test-avatar">MJ</div><div><div class="eet-test-name">Marcus Johnson</div><div class="eet-test-role">Texas, USA</div></div></div></div>
+        <div class="eet-test-card"><div class="stars">★★★★★</div><p class="quote">The pricing module alone was worth the entire course. I was undercharging by $1,200 on every job. Carson's formulas turned every one of my pours into real profit.</p><div class="eet-test-author"><div class="eet-test-avatar">SL</div><div><div class="eet-test-name">Steve Lopez</div><div class="eet-test-role">Florida, USA</div></div></div></div>
+        <div class="eet-test-card"><div class="stars">★★★★★</div><p class="quote">Best course I've ever taken. Booked and finished my first paying job within 20 days of enrolling. The 30-day launch play was the difference for me.</p><div class="eet-test-author"><div class="eet-test-avatar">DR</div><div><div class="eet-test-name">Dean Roberts</div><div class="eet-test-role">Georgia, USA</div></div></div></div>
+        <div class="eet-test-card"><div class="stars">★★★★★</div><p class="quote">Started Precision Epoxy Flooring right after enrolling. Booked and completed my first paying job 9 days in. The course gives you everything you need to actually hit the ground running.</p><div class="eet-test-author"><div class="eet-test-avatar">RP</div><div><div class="eet-test-name">Reegan P.</div><div class="eet-test-role">Precision Epoxy Flooring</div></div></div></div>
+        <div class="eet-test-card"><div class="stars">★★★★★</div><p class="quote">I had no construction background. None. Followed the install videos step by step on my own garage first, then sold the next one to my neighbor for $4,800. I'm fully booked through next month.</p><div class="eet-test-author"><div class="eet-test-avatar">TG</div><div><div class="eet-test-name">Tyler Greene</div><div class="eet-test-role">Ohio, USA</div></div></div></div>
+        <div class="eet-test-card"><div class="stars">★★★★★</div><p class="quote">I already had a handyman business and added epoxy as a service line. Doubled my monthly revenue inside 3 months because the margins are so much better than anything else I was selling.</p><div class="eet-test-author"><div class="eet-test-avatar">CK</div><div><div class="eet-test-name">Chris K.</div><div class="eet-test-role">Arizona, USA</div></div></div></div>
+      </div>
+    </div>
+    <div class="eet-container"><div class="eet-test-cta"><a class="eet-btn eet-btn-ghost" href="https://www.evergreenepoxytraining.com/offers/cBPCe4h4/checkout">See Why Students Are Switching to Epoxy</a></div></div>
+  </section>
+
+  <section class="eet-faq" id="faq">
+    <div class="eet-container">
+      <h2>You've got questions <br/><span class="eet-serif">We've got answers</span></h2>
+      <div class="eet-faq-list">
+        <div class="eet-faq-item"><div class="eet-faq-q">Do I need any prior experience with epoxy or construction?</div><div class="eet-faq-a">No. Carson started with zero experience. The course walks you from buying your first grinder to pouring your first floor — and from filing your LLC to closing your first paying customer. Beginners and existing contractors both use it.</div></div>
+        <div class="eet-faq-item"><div class="eet-faq-q">How fast can I land my first paying job?</div><div class="eet-faq-a">Many students book and complete their first paying job within 30 days of enrolling. Some have done it in 9. Speed depends on your effort and your local market — but the 30-day launch play inside the course is built specifically to get you a paid job fast.</div></div>
+        <div class="eet-faq-item"><div class="eet-faq-q">What does the course actually include?</div><div class="eet-faq-a">44 HD video lessons covering the full flake-floor installation system plus the complete business seminar — pricing formulas, the 30-day launch plan, contract templates, LLC and insurance setup, marketing, and how to scale with subs. Lifetime access. New systems (metallic, overlay, exterior coatings) are added as they're filmed.</div></div>
+        <div class="eet-faq-item"><div class="eet-faq-q">How does the guarantee work?</div><div class="eet-faq-a">60-day money-back guarantee — but you have to actually do the work. If you go through the course, follow the steps, and don't feel ready to launch your epoxy business inside 60 days, email us with what you've completed and we'll refund you in full. This is not a "watch nothing and ask for your money back" guarantee.</div></div>
+        <div class="eet-faq-item"><div class="eet-faq-q">What makes this different from in-person training?</div><div class="eet-faq-a">Most in-person workshops run $1,500–$3,000 for 3–5 days, plus travel. You learn the install and go home. Our course is cheaper, gives you lifetime access (rewatch anytime, free updates), and teaches the full business — not just the technique.</div></div>
+        <div class="eet-faq-item"><div class="eet-faq-q">Is there a payment plan?</div><div class="eet-faq-a">Yes. Start for $199 today, then $200/month for 6 months. Or pay $1,199 once and you're done. Both unlock everything immediately.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="eet-bignum" id="pricing">
+    <div class="eet-bignum-inner">
+      <h2>$280K Year One <span class="eet-serif">Blueprint<span class="dot">.</span></span></h2>
+      <div class="eet-bignum-cta">
+        <a class="eet-btn eet-btn-lg" href="https://www.evergreenepoxytraining.com/offers/cBPCe4h4/checkout">Enroll Now — $1,199</a>
+        &nbsp;
+        <a class="eet-btn eet-btn-ghost eet-btn-lg" href="https://www.evergreenepoxytraining.com/offers/jfhYyFWh/checkout">Or Start at $199</a>
+      </div>
+      <p style="margin-top:20px;color:var(--eet-mute);font-size:14px;">60-day money-back guarantee &nbsp;•&nbsp; Lifetime access &nbsp;•&nbsp; Future modules included</p>
+    </div>
+  </section>
+
+  <footer class="eet-foot">
+    <div class="eet-foot-grid">
+      <div class="eet-foot-col"><h4>Course</h4><a href="#system">The System</a><a href="#proof">Student Results</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
+      <div class="eet-foot-col"><h4>Account</h4><a href="https://www.evergreenepoxytraining.com/library">Member Login</a><a href="https://www.evergreenepoxytraining.com/offers/cBPCe4h4/checkout">Enroll Now</a><a href="mailto:sales@evergreenepoxyflooring.com">Contact</a></div>
+      <div class="eet-foot-col"><h4>Legal</h4><a href="#" data-eet-legal="privacy">Privacy Policy</a><a href="#" data-eet-legal="terms">Terms of Service</a><a href="#" data-eet-legal="disclaimer">Disclaimer</a><a href="#" data-eet-legal="earnings">Earnings Disclaimer</a></div>
+      <div class="eet-foot-col"><h4>About</h4><p class="eet-foot-disc">Results are not guaranteed and are not typical. Student outcomes depend on effort, experience, application, and many other factors unique to each business and market. Testimonials reflect exceptional outcomes and should not be considered average. All information is for educational purposes only and is not professional advice.</p></div>
+    </div>
+    <div class="eet-foot-bot">
+      <div>© 2026 Evergreen Epoxy Training. All rights reserved.</div>
+      <div>Questions? <a href="mailto:sales@evergreenepoxyflooring.com" style="color:var(--eet-green-bright);">sales@evergreenepoxyflooring.com</a></div>
+    </div>
+  </footer>
+
+  <div class="eet-modal-backdrop" id="eetModal"><div class="eet-modal" role="dialog" aria-modal="true"><button type="button" class="eet-modal-close" aria-label="Close">×</button><div id="eetModalBody"></div></div></div>
+
+  <template id="eet-legal-privacy"><h3>Privacy Policy</h3><div class="updated">Last updated: 2026</div><p>This Privacy Policy describes how Evergreen Epoxy Training ("we," "us," or "our") collects, uses, and protects the personal information of visitors and customers of evergreenepoxytraining.com.</p><h4>Information we collect</h4><ul><li>Name and email address you submit to opt in or enroll.</li><li>Billing details (processed by our payment processor; we do not store full card numbers).</li><li>Order and account history once you enroll.</li><li>Standard analytics data (pages visited, device, IP, referrer) collected automatically.</li></ul><h4>How we use it</h4><ul><li>To deliver the course and your purchase.</li><li>To send order receipts, course updates, and educational emails.</li><li>To improve the Site and our marketing.</li><li>To comply with legal obligations.</li></ul><h4>Third parties</h4><p>We use Kajabi to host the course and our payment processor (Stripe and/or PayPal) to process payments.</p><h4>Cookies</h4><p>We use cookies to remember preferences, measure traffic, and run advertising. You can disable cookies in your browser.</p><h4>Your rights</h4><p>You may request access, correction, or deletion of your personal information by emailing <a href="mailto:sales@evergreenepoxyflooring.com">sales@evergreenepoxyflooring.com</a>. We do not sell your personal information.</p><h4>Children</h4><p>The Site is not directed to children under 13.</p><h4>Contact</h4><p><a href="mailto:sales@evergreenepoxyflooring.com">sales@evergreenepoxyflooring.com</a></p></template>
+
+  <template id="eet-legal-terms"><h3>Terms of Service</h3><div class="updated">Last updated: 2026</div><p>By accessing or purchasing from evergreenepoxytraining.com, you agree to these Terms.</p><h4>Course access and license</h4><p>Upon enrollment you receive a personal, non-transferable license to access the course materials for your individual use. You may not record, redistribute, resell, or share course content.</p><h4>Lifetime access</h4><p>"Lifetime access" means access for as long as Evergreen Epoxy Training operates the Site and the course product.</p><h4>Refund policy</h4><p>We offer a 60-day money-back guarantee. To qualify you must demonstrate that you went through the course material and applied the steps. This is not an unconditional refund.</p><h4>Payment plans</h4><p>If you select a payment plan, you authorize us to charge the agreed amount on the agreed schedule until paid in full.</p><h4>No professional advice</h4><p>The course is for educational purposes only and is not legal, tax, financial, accounting, or business advice.</p><h4>Results not guaranteed</h4><p>Earnings or business outcomes shown are exceptional and not typical. We make no guarantee of any specific result.</p><h4>Limitation of liability</h4><p>To the maximum extent permitted by law, Evergreen Epoxy Training is not liable for indirect, incidental, special, consequential, or punitive damages.</p><h4>Intellectual property</h4><p>All content is owned by Evergreen Epoxy Training. You may not copy, modify, or create derivative works without written permission.</p><h4>Governing law</h4><p>These Terms are governed by the laws of the state where Evergreen Epoxy Training is registered.</p><h4>Contact</h4><p><a href="mailto:sales@evergreenepoxyflooring.com">sales@evergreenepoxyflooring.com</a></p></template>
+
+  <template id="eet-legal-disclaimer"><h3>Disclaimer</h3><div class="updated">Last updated: 2026</div><h4>Educational content only</h4><p>The information, videos, and materials are provided for general educational purposes only.</p><h4>No professional relationship</h4><p>No attorney-client, accountant-client, or other professional relationship is formed by your purchase of the course or use of the Site.</p><h4>Trade and safety</h4><p>Epoxy floor coatings involve power tools, chemicals, and physically demanding work. Always follow manufacturer instructions and required PPE.</p><h4>Testimonials</h4><p>Testimonials reflect actual experiences of selected students and are not guarantees of similar outcomes.</p><h4>No warranty</h4><p>The Site and course are provided "as is" without warranties of any kind.</p><h4>Contact</h4><p><a href="mailto:sales@evergreenepoxyflooring.com">sales@evergreenepoxyflooring.com</a></p></template>
+
+  <template id="eet-legal-earnings"><h3>Earnings Disclaimer</h3><div class="updated">Last updated: 2026</div><p>Evergreen Epoxy Training does not guarantee any income, revenue, or business outcome. Any income figures or student results are exceptional and not typical.</p><h4>Carson's results</h4><p>References to "$280K in year one" describe Carson Peters' personal experience. Your results will not be the same.</p><h4>Student results</h4><p>Most students who take the course will not match these specific outcomes.</p><h4>What affects your results</h4><ul><li>Your local market demand for epoxy flooring.</li><li>How quickly you take action and complete the course.</li><li>How much capital you invest in equipment, materials, and marketing.</li><li>Your existing skills, work ethic, sales ability, and business judgment.</li></ul><h4>Your responsibility</h4><p>You are responsible for the success or failure of your business decisions. Before making financial commitments, consult a qualified professional advisor.</p><h4>Contact</h4><p><a href="mailto:sales@evergreenepoxyflooring.com">sales@evergreenepoxyflooring.com</a></p></template>
+
+  <div class="eet-stickybar"><div class="info"><strong>Enroll Now</strong><br/>44 videos • Lifetime access</div><a class="eet-btn" href="https://www.evergreenepoxytraining.com/offers/cBPCe4h4/checkout">Enroll →</a></div>
+</div>
+
+<script>
+  (function(){
+    document.body.classList.add('eet-body');
+    document.querySelectorAll('.eet-faq-item .eet-faq-q').forEach(function(q){
+      q.addEventListener('click', function(){
+        var item = q.parentElement;
+        var open = item.classList.contains('open');
+        document.querySelectorAll('.eet-faq-item.open').forEach(function(o){ o.classList.remove('open'); });
+        if (!open) item.classList.add('open');
+      });
+    });
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.eet-reveal').forEach(function(el){ io.observe(el); });
+    } else { document.querySelectorAll('.eet-reveal').forEach(function(el){ el.classList.add('in'); }); }
+
+    function duplicateTrack(id){ var t = document.getElementById(id); if (!t) return; t.innerHTML = t.innerHTML + t.innerHTML; }
+    duplicateTrack('eetStatesTrack');
+    duplicateTrack('eetTestTrack');
+
+    function animateCount(el, finalText){
+      var rangeMatch = finalText.match(/^([^0-9]*)([0-9]+)([^0-9]+)([0-9]+)([^0-9]*)$/);
+      if (rangeMatch) {
+        var p1 = rangeMatch[1], n1 = parseInt(rangeMatch[2],10), sep = rangeMatch[3], n2 = parseInt(rangeMatch[4],10), sf = rangeMatch[5];
+        var dur = 1400, t0 = performance.now();
+        function tick(now){ var p = Math.min(1, (now - t0)/dur); p = 1 - Math.pow(1-p, 3); el.textContent = p1 + Math.round(n1*p) + sep + Math.round(n2*p) + sf; if (p < 1) requestAnimationFrame(tick); else el.textContent = finalText; }
+        requestAnimationFrame(tick); return;
+      }
+      var match = finalText.match(/^([^0-9-]*)([0-9]+(?:\.[0-9]+)?)([^0-9]*)$/);
+      if (!match) { el.textContent = finalText; return; }
+      var prefix = match[1], n = parseFloat(match[2]), suffix = match[3];
+      var dur = 1400, t0 = performance.now();
+      function tick(now){ var p = Math.min(1, (now - t0)/dur); p = 1 - Math.pow(1-p, 3); var val = n * p; var rounded = (n % 1 === 0) ? Math.round(val) : val.toFixed(1); el.textContent = prefix + rounded + suffix; if (p < 1) requestAnimationFrame(tick); else el.textContent = finalText; }
+      requestAnimationFrame(tick);
+    }
+
+    var modalRoot = document.getElementById('eetModal');
+    var modalBody = document.getElementById('eetModalBody');
+    function openLegal(name){ var tpl = document.getElementById('eet-legal-' + name); if (!tpl || !modalRoot) return; modalBody.innerHTML = ''; modalBody.appendChild(tpl.content.cloneNode(true)); modalRoot.classList.add('open'); modalRoot.scrollTop = 0; document.body.style.overflow = 'hidden'; }
+    function closeLegal(){ modalRoot.classList.remove('open'); document.body.style.overflow = ''; }
+    document.querySelectorAll('[data-eet-legal]').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); openLegal(a.getAttribute('data-eet-legal')); }); });
+    if (modalRoot) {
+      modalRoot.addEventListener('click', function(e){ if (e.target === modalRoot || e.target.classList.contains('eet-modal-close')) closeLegal(); });
+      document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && modalRoot.classList.contains('open')) closeLegal(); });
+    }
+
+    if ('IntersectionObserver' in window) {
+      var seen = new WeakSet();
+      var statIo = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting && !seen.has(e.target)) {
+            seen.add(e.target);
+            var finalText = e.target.dataset.final || e.target.textContent.trim();
+            e.target.dataset.final = finalText;
+            animateCount(e.target, finalText);
+          }
+        });
+      }, { threshold: 0.5 });
+      document.querySelectorAll('.eet-stat-value').forEach(function(el){ statIo.observe(el); });
+    }
+  })();
+</script>
